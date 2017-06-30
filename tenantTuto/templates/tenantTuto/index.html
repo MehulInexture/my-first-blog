@@ -1,0 +1,55 @@
+
+
+    {% extends 'coster/base.html' %}
+    {% block title %}
+        {{ request.tenant.name }}
+    {% endblock %}
+
+
+    {% block body %}
+
+    {% if request.tenant.name != 'API' %}
+
+    <h1>{{ request.tenant.name }}</h1>
+    <h2>{{ request.tenant.description }}</h2>
+
+    <hr>
+    {% if request.tenant.category == 'a' %}
+
+    <textarea maxlength="50" minlength="100" placeholder="This is textarea show only if tenant is type 'a' " style="
+        background: rgb(14, 12, 12);
+        margin: 0px;
+        width: 619px;
+        height: 39px;
+
+    "></textarea>
+    {% endif %}
+
+    <hr>
+    <hr>
+    <h4><strong>This is from <b>tenantTuto</b> </strong></h4>
+
+    <hr>
+    <br>
+
+        <ul>
+
+    {% for ride in ride %}
+            {% if request.tenant.category == 'a' and ride.danger_rate <= 59 %}
+            <li>
+                <a href = "{% url 'tenantTuto:detail' ride.id %}">{{ ride.name }}</a>
+            </li>
+            {% elif request.tenant.category != 'a' %}
+            <li>
+                <a href = "{% url 'tenantTuto:detail' ride.id %}">{{ ride.name }}</a>
+            </li>
+            {% endif %}
+
+    {% endfor %}
+        </ul>
+    <br>
+    <hr>
+
+
+{% endif %}
+{% endblock %}
